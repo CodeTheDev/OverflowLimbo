@@ -1,0 +1,26 @@
+name: Build OverflowLimbo
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        java: [17]
+      fail-fast: true
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Java ${{ matrix.java }}
+        uses: actions/setup-java@v3
+        with:
+          java-version: ${{ matrix.java }}
+          distribution: 'temurin'
+      - name: Build JAR
+        run: |
+            chmod +x gradlew
+            ./gradlew shadowJar --stacktrace
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: OverflowLimbo-1.0
+          path: build/libs
