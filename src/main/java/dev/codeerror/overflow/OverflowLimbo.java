@@ -1,5 +1,6 @@
 package dev.codeerror.overflow;
 
+import dev.codeerror.overflow.util.OverflowUtils;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -43,6 +44,11 @@ public class OverflowLimbo {
         MinecraftServer server = MinecraftServer.init();
         MinecraftServer.setBrandName(config.getServerBrand());
         MinecraftServer.setCompressionThreshold(config.getCompressionThreshold() == -1 ? 0 : config.getCompressionThreshold());
+        String encodedServerIcon = OverflowUtils.encodeServerIcon();
+        String serverVersion = config.getServerBrand() + " " + MinecraftServer.VERSION_NAME;
+        Component serverMotd = MiniMessage.miniMessage().deserialize(config.getMotd());
+        Component serverTabHeader = MiniMessage.miniMessage().deserialize(config.getTabHeader());
+        Component serverTabFooter = MiniMessage.miniMessage().deserialize(config.getTabFooter());
 
         // Dimension Registration
         logger.info("Initializing dimension manager...");
@@ -70,6 +76,7 @@ public class OverflowLimbo {
         InstanceContainer world = MinecraftServer.getInstanceManager().createInstanceContainer(THE_VOID);
         GlobalEventHandler events = MinecraftServer.getGlobalEventHandler();
         Scheduler scheduler = MinecraftServer.getSchedulerManager();
+        Pos spawnPos = new Pos(0.5, 128, 0.5);
 
         world.setTime(0);
         world.setTimeRate(0);
@@ -82,16 +89,21 @@ public class OverflowLimbo {
         events.addListener(ServerListPingEvent.class, event -> {
             ResponseData response = new ResponseData();
 
+            response.setVersion(serverVersion);
             response.setMaxPlayer(config.getPlayerLimit() == -1 ? event.getResponseData().getOnline() + 1 : config.getPlayerLimit());
-            response.setDescription(MiniMessage.miniMessage().deserialize(config.getMotd()));
+            response.setDescription(serverMotd);
+            response.setFavicon(encodedServerIcon);
             event.setResponseData(response);
         });
-        events.addListener(AsyncPlayerPreLoginEvent.class, event -> logger.info(event.getPlayer().getUsername() + " [" + event.getPlayer().getPlayerConnection().getRemoteAddress() + "] connected."));
+        events.addListener(AsyncPlayerPreLoginEvent.class, event -> {
+            Player player = event.getPlayer();
+            logger.info(player.getUsername() + " [" + player.getPlayerConnection().getRemoteAddress() + "] connected.");
+        });
         events.addListener(PlayerLoginEvent.class, event -> {
             Player player = event.getPlayer();
 
             player.setAutoViewable(false);
-            player.setRespawnPoint(new Pos(0.5, 128, 0.5));
+            player.setRespawnPoint(spawnPos);
             event.setSpawningInstance(world);
         });
         events.addListener(PlayerSkinInitEvent.class, event -> event.setSkin(PlayerSkin.fromUsername(event.getPlayer().getUsername())));
@@ -103,10 +115,7 @@ public class OverflowLimbo {
             player.setInvulnerable(true);
             player.setInvisible(true);
 
-            player.sendPlayerListHeaderAndFooter(
-                    MiniMessage.miniMessage().deserialize(config.getTabHeader()),
-                    MiniMessage.miniMessage().deserialize(config.getTabFooter())
-            );
+            player.sendPlayerListHeaderAndFooter(serverTabHeader, serverTabFooter);
 
             if (config.isVelocityEnabled()) {
                 player.sendMessage(Component
