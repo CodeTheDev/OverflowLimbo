@@ -93,4 +93,5 @@ public class OverflowConfig {
     public String getVelocitySecret() {
         return velocitySecret;
     }
+
 }
