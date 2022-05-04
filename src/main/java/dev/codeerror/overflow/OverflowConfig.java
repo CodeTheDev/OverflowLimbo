@@ -27,6 +27,7 @@ public class OverflowConfig {
     private String tabFooter;
     private boolean velocityEnabled;
     private String velocitySecret;
+    private boolean playerSkinsEnabled;
 
     public void saveDefaultConfig() {
         File defaultConfig = new File(new File(OverflowConfig.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getParentFile(), "server.properties");
@@ -54,6 +55,7 @@ public class OverflowConfig {
             tabFooter = config.getProperty("tablist-footer", "");
             velocityEnabled = Boolean.parseBoolean(config.getProperty("velocity", "false"));
             velocitySecret = config.getProperty("velocity-secret", "NONE");
+            playerSkinsEnabled = Boolean.parseBoolean(config.getProperty("player-skins", "false"));
             logger.info("Loaded configuration.");
         } catch (IOException e) {
             logger.error("Unable to load/parse configuration.", e);
@@ -92,6 +94,9 @@ public class OverflowConfig {
     }
     public String getVelocitySecret() {
         return velocitySecret;
+    }
+    public boolean isPlayerSkinsEnabled() {
+        return playerSkinsEnabled;
     }
 
 }
