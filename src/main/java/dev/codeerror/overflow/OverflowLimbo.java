@@ -106,7 +106,9 @@ public class OverflowLimbo {
             player.setRespawnPoint(spawnPos);
             event.setSpawningInstance(world);
         });
-        events.addListener(PlayerSkinInitEvent.class, event -> event.setSkin(PlayerSkin.fromUsername(event.getPlayer().getUsername())));
+        if (config.isPlayerSkinsEnabled()) {
+            events.addListener(PlayerSkinInitEvent.class, event -> event.setSkin(PlayerSkin.fromUsername(event.getPlayer().getUsername())));
+        }
         events.addListener(PlayerSpawnEvent.class, event -> {
             Player player = event.getPlayer();
 
