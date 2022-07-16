@@ -17,7 +17,7 @@ repositories {
 
 dependencies {
     implementation("com.github.Minestom:Minestom:master-SNAPSHOT")
-    implementation("net.kyori:adventure-text-minimessage:4.10.1")
+    implementation("net.kyori:adventure-text-minimessage:4.11.0")
 }
 
 tasks.withType<ShadowJar> {
