@@ -47,8 +47,6 @@ public class OverflowLimbo {
         String encodedServerIcon = OverflowUtils.encodeServerIcon();
         String serverVersion = config.getServerBrand() + " " + MinecraftServer.VERSION_NAME;
         Component serverMotd = MiniMessage.miniMessage().deserialize(config.getMotd());
-        Component serverTabHeader = MiniMessage.miniMessage().deserialize(config.getTabHeader());
-        Component serverTabFooter = MiniMessage.miniMessage().deserialize(config.getTabFooter());
 
         // Dimension Registration
         logger.info("Initializing dimension manager...");
@@ -117,8 +115,6 @@ public class OverflowLimbo {
             player.setInvulnerable(true);
             player.setInvisible(true);
 
-            player.sendPlayerListHeaderAndFooter(serverTabHeader, serverTabFooter);
-
             if (config.isVelocityEnabled()) {
                 player.sendMessage(Component
                         .text("Servers are currently full! You have been temporarily placed into an overflow limbo server.")
@@ -130,9 +126,6 @@ public class OverflowLimbo {
         events.addListener(PlayerChatEvent.class, event -> event.setCancelled(true));
         events.addListener(PlayerDisconnectEvent.class, event -> {
             Player player = event.getPlayer();
-
-            // TODO: Fix tab list persistence when connecting to other servers.
-
             logger.info(player.getUsername() + " [" + player.getPlayerConnection().getRemoteAddress() + "] disconnected.");
         });
 

@@ -23,8 +23,6 @@ public class OverflowConfig {
     private int viewDistance;
     private int playerLimit;
     private String motd;
-    private String tabHeader;
-    private String tabFooter;
     private boolean velocityEnabled;
     private String velocitySecret;
     private boolean playerSkinsEnabled;
@@ -48,13 +46,11 @@ public class OverflowConfig {
             serverAddress = config.getProperty("server-address", "127.0.0.1");
             serverPort = Integer.parseInt(config.getProperty("server-port", "25565"));
             compressionThreshold = Integer.parseInt(config.getProperty("compression-threshold", "-1"));
-            viewDistance = Integer.parseInt(config.getProperty("view-distance", "2"));
+            viewDistance = Integer.parseInt(config.getProperty("view-distance", "1"));
             playerLimit = Integer.parseInt(config.getProperty("max-players", "-1"));
-            motd = config.getProperty("motd", "<dark_aqua><italic>An OverflowLimbo Server");
-            tabHeader = config.getProperty("tablist-header", "");
-            tabFooter = config.getProperty("tablist-footer", "");
+            motd = config.getProperty("motd", "<dark_aqua><i>An OverflowLimbo Server</i></dark_aqua>");
             velocityEnabled = Boolean.parseBoolean(config.getProperty("velocity", "false"));
-            velocitySecret = config.getProperty("velocity-secret", "NONE");
+            velocitySecret = config.getProperty("velocity-secret", "");
             playerSkinsEnabled = Boolean.parseBoolean(config.getProperty("player-skins", "false"));
             logger.info("Loaded configuration.");
         } catch (IOException e) {
@@ -82,12 +78,6 @@ public class OverflowConfig {
     }
     public String getMotd() {
         return motd;
-    }
-    public String getTabHeader() {
-        return tabHeader;
-    }
-    public String getTabFooter() {
-        return tabFooter;
     }
     public boolean isVelocityEnabled() {
         return velocityEnabled;
