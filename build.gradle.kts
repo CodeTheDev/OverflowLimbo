@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "dev.codeerror"
-version = "1.0"
+version = "1.1"
 
 apply(plugin = "com.github.johnrengelman.shadow")
 
@@ -16,7 +16,7 @@ repositories {
 }
 
 dependencies {
-    implementation("com.github.Minestom:Minestom:5f8842084c")
+    implementation("com.github.Minestom:Minestom:b3d81f274c")
     implementation("net.kyori:adventure-text-minimessage:4.11.0")
 }
 
