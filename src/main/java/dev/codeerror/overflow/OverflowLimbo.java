@@ -1,9 +1,12 @@
 package dev.codeerror.overflow;
 
+import dev.codeerror.overflow.command.PingCommand;
+import dev.codeerror.overflow.command.WhereCommand;
 import dev.codeerror.overflow.util.OverflowUtils;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.minestom.server.MinecraftServer;
+import net.minestom.server.command.CommandManager;
 import net.minestom.server.coordinate.Pos;
 import net.minestom.server.entity.GameMode;
 import net.minestom.server.entity.Player;
@@ -77,6 +80,11 @@ public class OverflowLimbo {
         world.setTimeUpdate(null);
         world.setGenerator(unit -> unit.modifier().fillHeight(-64, 320, Block.AIR));
         world.enableAutoChunkLoad(true);
+
+        // Commands
+        CommandManager commandManager = MinecraftServer.getCommandManager();
+        commandManager.register(new WhereCommand());
+        commandManager.register(new PingCommand());
 
         // Event Listeners
         logger.info("Registering event listeners...");
