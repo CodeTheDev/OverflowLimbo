@@ -23,9 +23,10 @@ public class OverflowConfig {
     private int viewDistance;
     private int playerLimit;
     private String motd;
+    private boolean playerSkinsEnabled;
+    private boolean tablistEnabled;
     private boolean velocityEnabled;
     private String velocitySecret;
-    private boolean playerSkinsEnabled;
 
     public void saveDefaultConfig() {
         File defaultConfig = new File(new File(OverflowConfig.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getParentFile(), "server.properties");
@@ -49,9 +50,10 @@ public class OverflowConfig {
             viewDistance = Integer.parseInt(config.getProperty("view-distance", "1"));
             playerLimit = Integer.parseInt(config.getProperty("max-players", "-1"));
             motd = config.getProperty("motd", "<dark_aqua><i>An OverflowLimbo Server</i></dark_aqua>");
+            playerSkinsEnabled = Boolean.parseBoolean(config.getProperty("player-skins", "false"));
+            tablistEnabled = Boolean.parseBoolean(config.getProperty("tablist-enabled", "false"));
             velocityEnabled = Boolean.parseBoolean(config.getProperty("velocity", "false"));
             velocitySecret = config.getProperty("velocity-secret", "");
-            playerSkinsEnabled = Boolean.parseBoolean(config.getProperty("player-skins", "false"));
             logger.info("Loaded configuration.");
         } catch (IOException e) {
             logger.error("Unable to load/parse configuration.", e);
@@ -79,14 +81,17 @@ public class OverflowConfig {
     public String getMotd() {
         return motd;
     }
+    public boolean isPlayerSkinsEnabled() {
+        return playerSkinsEnabled;
+    }
+    public boolean isTablistEnabled() {
+        return tablistEnabled;
+    }
     public boolean isVelocityEnabled() {
         return velocityEnabled;
     }
     public String getVelocitySecret() {
         return velocitySecret;
-    }
-    public boolean isPlayerSkinsEnabled() {
-        return playerSkinsEnabled;
     }
 
 }

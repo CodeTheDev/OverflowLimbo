@@ -17,6 +17,7 @@ import net.minestom.server.event.server.ServerListPingEvent;
 import net.minestom.server.extras.velocity.VelocityProxy;
 import net.minestom.server.instance.InstanceContainer;
 import net.minestom.server.instance.block.Block;
+import net.minestom.server.network.packet.server.play.PlayerInfoPacket;
 import net.minestom.server.ping.ResponseData;
 import net.minestom.server.utils.NamespaceID;
 import net.minestom.server.world.DimensionType;
@@ -106,6 +107,7 @@ public class OverflowLimbo {
             player.setRespawnPoint(spawnPos);
             event.setSpawningInstance(world);
         });
+
         if (config.isPlayerSkinsEnabled()) {
             events.addListener(PlayerSkinInitEvent.class, event -> event.setSkin(PlayerSkin.fromUsername(event.getPlayer().getUsername())));
         }
@@ -116,6 +118,11 @@ public class OverflowLimbo {
             player.setInvulnerable(true);
             player.setInvisible(true);
         });
+        if (!config.isTablistEnabled()) {
+            events.addListener(PlayerPacketOutEvent.class, event -> {
+                if (event.getPacket() instanceof PlayerInfoPacket) event.setCancelled(true);
+            });
+        }
         events.addListener(PlayerMoveEvent.class, event -> event.setCancelled(true));
         events.addListener(PlayerChatEvent.class, event -> event.setCancelled(true));
         events.addListener(PlayerDisconnectEvent.class, event -> {
