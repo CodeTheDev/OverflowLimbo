@@ -51,7 +51,7 @@ public class OverflowConfig {
             playerLimit = Integer.parseInt(config.getProperty("max-players", "-1"));
             motd = config.getProperty("motd", "<dark_aqua><i>An OverflowLimbo Server</i></dark_aqua>");
             playerSkinsEnabled = Boolean.parseBoolean(config.getProperty("player-skins", "false"));
-            tablistEnabled = Boolean.parseBoolean(config.getProperty("tablist-enabled", "false"));
+            tablistEnabled = Boolean.parseBoolean(config.getProperty("tablist-enabled", "true"));
             velocityEnabled = Boolean.parseBoolean(config.getProperty("velocity", "false"));
             velocitySecret = config.getProperty("velocity-secret", "");
             logger.info("Loaded configuration.");
