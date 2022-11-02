@@ -16,7 +16,7 @@ repositories {
 }
 
 dependencies {
-    implementation("com.github.Minestom:Minestom:18c46481f4")
+    implementation("com.github.Minestom:Minestom:42195c536b")
     implementation("net.kyori:adventure-text-minimessage:4.11.0")
 }
 
