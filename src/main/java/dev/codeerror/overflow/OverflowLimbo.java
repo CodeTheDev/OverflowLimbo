@@ -63,7 +63,7 @@ public class OverflowLimbo {
                 .ceilingEnabled(false)
                 .fixedTime(null)
                 .effects("minecraft:the_end")
-                .ambientLight(0.0f)
+                .ambientLight(2.0f)
                 .height(384)
                 .minY(-64)
                 .logicalHeight(384)
