@@ -16,8 +16,8 @@ repositories {
 }
 
 dependencies {
-    implementation("com.github.Minestom:Minestom:42195c536b")
-    implementation("net.kyori:adventure-text-minimessage:4.11.0")
+    implementation("com.github.Minestom:Minestom:8eb089bf3e")
+    implementation("net.kyori:adventure-text-minimessage:4.12.0")
 }
 
 tasks.withType<ShadowJar> {
