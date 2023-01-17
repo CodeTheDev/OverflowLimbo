@@ -25,8 +25,9 @@ public class OverflowConfig {
     private String motd;
     private boolean playerSkinsEnabled;
     private boolean tablistEnabled;
-    private boolean velocityEnabled;
+    private String proxyType;
     private String velocitySecret;
+    private String bungeeGuardToken;
 
     public void saveDefaultConfig() {
         File defaultConfig = new File(new File(OverflowConfig.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getParentFile(), "server.properties");
@@ -52,8 +53,9 @@ public class OverflowConfig {
             motd = config.getProperty("motd", "<dark_aqua><i>An OverflowLimbo Server</i></dark_aqua>");
             playerSkinsEnabled = Boolean.parseBoolean(config.getProperty("player-skins", "false"));
             tablistEnabled = Boolean.parseBoolean(config.getProperty("tablist-enabled", "true"));
-            velocityEnabled = Boolean.parseBoolean(config.getProperty("velocity", "false"));
+            proxyType = config.getProperty("proxy-type", "none");
             velocitySecret = config.getProperty("velocity-secret", "");
+            bungeeGuardToken = config.getProperty("bungeeguard-token", "");
             logger.info("Loaded configuration.");
         } catch (IOException e) {
             logger.error("Unable to load/parse configuration.", e);
@@ -87,11 +89,14 @@ public class OverflowConfig {
     public boolean isTablistEnabled() {
         return tablistEnabled;
     }
-    public boolean isVelocityEnabled() {
-        return velocityEnabled;
+    public String getProxyType() {
+        return proxyType;
     }
     public String getVelocitySecret() {
         return velocitySecret;
+    }
+    public String getBungeeGuardToken() {
+        return bungeeGuardToken;
     }
 
 }

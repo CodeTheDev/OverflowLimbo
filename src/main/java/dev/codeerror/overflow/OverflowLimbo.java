@@ -14,6 +14,7 @@ import net.minestom.server.entity.PlayerSkin;
 import net.minestom.server.event.GlobalEventHandler;
 import net.minestom.server.event.player.*;
 import net.minestom.server.event.server.ServerListPingEvent;
+import net.minestom.server.extras.bungee.BungeeCordProxy;
 import net.minestom.server.extras.velocity.VelocityProxy;
 import net.minestom.server.instance.InstanceContainer;
 import net.minestom.server.instance.block.Block;
@@ -26,6 +27,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.lang.management.ManagementFactory;
+import java.util.Set;
 
 public class OverflowLimbo {
 
@@ -130,12 +132,27 @@ public class OverflowLimbo {
             logger.info(player.getUsername() + " [" + player.getPlayerConnection().getRemoteAddress() + "] disconnected.");
         });
 
-        // Velocity Forwarding Support
-        boolean velocityEnabled = config.isVelocityEnabled();
-        String velocitySecret = config.getVelocitySecret();
-        if (velocityEnabled && !velocitySecret.isBlank()) {
-            VelocityProxy.enable(velocitySecret);
-            logger.info("Velocity modern forwarding support enabled.");
+        // Proxy Forwarding Support
+        String proxyType = config.getProxyType();
+        switch (proxyType) {
+            case "velocity" -> {
+                String velocitySecret = config.getVelocitySecret();
+                if (velocitySecret.isBlank()) break;
+                VelocityProxy.enable(velocitySecret);
+                logger.info("Velocity modern forwarding support enabled.");
+            }
+            case "bungeecord" -> {
+                String bungeeGuardToken = config.getBungeeGuardToken();
+                if (bungeeGuardToken.isBlank()) {
+                    BungeeCordProxy.enable();
+                    logger.warn("BungeeCord legacy forwarding support enabled.");
+                    logger.warn("Please use BungeeGuard for secure BungeeCord forwarding support.");
+                } else {
+                    BungeeCordProxy.setBungeeGuardTokens(Set.of(bungeeGuardToken));
+                    BungeeCordProxy.enable();
+                    logger.info("BungeeGuard secure forwarding support for BungeeCord enabled.");
+                }
+            }
         }
 
         // Start Server
