@@ -31,6 +31,6 @@ To find the compiled server jar, navigate to the `build/libs` directory inside t
 | *motd*                  | `<dark_aqua><i>An OverflowLimbo Server</i></dark_aqua>` | String  | Server list MOTD (Uses MiniMessage text formatting).                  |
 | *player-skins*          | `false`                                                 | Boolean | Show player skins (Do not enable when using online mode proxy).       |
 | *tablist-enabled*       | `true`                                                  | Boolean | Enable tablist (Disabling tablist may cause visual issues).           |
-| *proxy-type*            | `false`                                                 | Boolean | Enable velocity modern forwarding support (requires Velocity secret). |
+| *proxy-type*            | `none`                                                  | String  | Specifies the type of proxy being used (velocity, bungeecord, none).  |
 | *velocity-secret*       |                                                         | String  | Velocity secret for modern forwarding.                                |
 | *bungeeguard-token*     |                                                         | String  | BungeeGuard token for secure BungeeCord forwarding.                   |
