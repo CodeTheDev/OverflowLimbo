@@ -47,10 +47,10 @@ public class OverflowConfig {
             serverAddress = config.getProperty("server-address", "127.0.0.1");
             serverPort = Integer.parseInt(config.getProperty("server-port", "25565"));
             compressionThreshold = Integer.parseInt(config.getProperty("compression-threshold", "-1"));
-            viewDistance = Integer.parseInt(config.getProperty("view-distance", "1"));
+            viewDistance = Integer.parseInt(config.getProperty("view-distance", "3"));
             playerLimit = Integer.parseInt(config.getProperty("max-players", "-1"));
             motd = config.getProperty("motd", "<dark_aqua><i>An OverflowLimbo Server</i></dark_aqua>");
-            tablistEnabled = Boolean.parseBoolean(config.getProperty("tablist-enabled", "true"));
+            tablistEnabled = Boolean.parseBoolean(config.getProperty("tablist-enabled", "false"));
             proxyType = config.getProperty("proxy-type", "none");
             velocitySecret = config.getProperty("velocity-secret", "");
             bungeeGuardToken = config.getProperty("bungeeguard-token", "");
