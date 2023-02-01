@@ -23,7 +23,6 @@ public class OverflowConfig {
     private int viewDistance;
     private int playerLimit;
     private String motd;
-    private boolean playerSkinsEnabled;
     private boolean tablistEnabled;
     private String proxyType;
     private String velocitySecret;
@@ -51,7 +50,6 @@ public class OverflowConfig {
             viewDistance = Integer.parseInt(config.getProperty("view-distance", "1"));
             playerLimit = Integer.parseInt(config.getProperty("max-players", "-1"));
             motd = config.getProperty("motd", "<dark_aqua><i>An OverflowLimbo Server</i></dark_aqua>");
-            playerSkinsEnabled = Boolean.parseBoolean(config.getProperty("player-skins", "false"));
             tablistEnabled = Boolean.parseBoolean(config.getProperty("tablist-enabled", "true"));
             proxyType = config.getProperty("proxy-type", "none");
             velocitySecret = config.getProperty("velocity-secret", "");
@@ -82,9 +80,6 @@ public class OverflowConfig {
     }
     public String getMotd() {
         return motd;
-    }
-    public boolean isPlayerSkinsEnabled() {
-        return playerSkinsEnabled;
     }
     public boolean isTablistEnabled() {
         return tablistEnabled;

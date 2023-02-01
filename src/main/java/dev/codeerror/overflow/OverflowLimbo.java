@@ -10,10 +10,10 @@ import net.minestom.server.command.CommandManager;
 import net.minestom.server.coordinate.Pos;
 import net.minestom.server.entity.GameMode;
 import net.minestom.server.entity.Player;
-import net.minestom.server.entity.PlayerSkin;
 import net.minestom.server.event.GlobalEventHandler;
 import net.minestom.server.event.player.*;
 import net.minestom.server.event.server.ServerListPingEvent;
+import net.minestom.server.extras.MojangAuth;
 import net.minestom.server.extras.bungee.BungeeCordProxy;
 import net.minestom.server.extras.velocity.VelocityProxy;
 import net.minestom.server.instance.InstanceContainer;
@@ -109,10 +109,6 @@ public class OverflowLimbo {
             player.setRespawnPoint(spawnPos);
             event.setSpawningInstance(world);
         });
-
-        if (config.isPlayerSkinsEnabled()) {
-            events.addListener(PlayerSkinInitEvent.class, event -> event.setSkin(PlayerSkin.fromUsername(event.getPlayer().getUsername())));
-        }
         events.addListener(PlayerSpawnEvent.class, event -> {
             Player player = event.getPlayer();
             player.setGameMode(GameMode.SPECTATOR);
@@ -153,6 +149,7 @@ public class OverflowLimbo {
                     logger.info("BungeeGuard secure forwarding support for BungeeCord enabled.");
                 }
             }
+            default -> MojangAuth.init();
         }
 
         // Start Server
