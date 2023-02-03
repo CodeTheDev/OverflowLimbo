@@ -27,7 +27,7 @@ To find the compiled server jar, navigate to the `build/libs` directory inside t
 | *server-port*           | `25565`                                                 | Integer | The port of the server.                                              |
 | *compression-threshold* | `-1`                                                    | Integer | Network Compression (-1 is 0, which means no compression).           |
 | *view-distance*         | `3`                                                     | Integer | Player view distance (May cause visual issues if set below 3).       |
-| *max-players*           | `-1`                                                    | Integer | Maximum player limit (-1 is unlimited, player limit is only visual). |
+| *max-players*           | `-1`                                                    | Integer | Maximum player limit (-1 is unlimited).                              |
 | *motd*                  | `<dark_aqua><i>An OverflowLimbo Server</i></dark_aqua>` | String  | Server list MOTD (Uses MiniMessage text formatting).                 |
 | *tablist-enabled*       | `false`                                                 | Boolean | Toggle tablist visibility.                                           |
 | *proxy-type*            | `none`                                                  | String  | Specifies the type of proxy being used (velocity, bungeecord, none). |

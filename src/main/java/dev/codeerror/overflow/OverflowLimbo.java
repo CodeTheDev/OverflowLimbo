@@ -100,7 +100,11 @@ public class OverflowLimbo {
         });
         events.addListener(AsyncPlayerPreLoginEvent.class, event -> {
             Player player = event.getPlayer();
-            logger.info(player.getUsername() + " [" + player.getPlayerConnection().getRemoteAddress() + "] connected.");
+            if (world.getPlayers().size() >= config.getPlayerLimit() && config.getPlayerLimit() > -1) {
+                event.getPlayer().getPlayerConnection().disconnect();
+            } else {
+                logger.info(player.getUsername() + " [" + player.getPlayerConnection().getRemoteAddress() + "] connected.");
+            }
         });
         events.addListener(PlayerLoginEvent.class, event -> {
             Player player = event.getPlayer();
