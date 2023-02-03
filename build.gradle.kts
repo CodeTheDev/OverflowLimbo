@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "dev.codeerror"
-version = "1.1.2"
+version = "1.2.1"
 
 apply(plugin = "com.github.johnrengelman.shadow")
 
