@@ -18,7 +18,7 @@ import net.minestom.server.extras.bungee.BungeeCordProxy;
 import net.minestom.server.extras.velocity.VelocityProxy;
 import net.minestom.server.instance.InstanceContainer;
 import net.minestom.server.instance.block.Block;
-import net.minestom.server.network.packet.server.play.PlayerInfoPacket;
+import net.minestom.server.network.packet.server.play.PlayerInfoUpdatePacket;
 import net.minestom.server.ping.ResponseData;
 import net.minestom.server.utils.NamespaceID;
 import net.minestom.server.world.DimensionType;
@@ -106,7 +106,7 @@ public class OverflowLimbo {
                 logger.info(player.getUsername() + " [" + player.getPlayerConnection().getRemoteAddress() + "] connected.");
             }
         });
-        events.addListener(PlayerLoginEvent.class, event -> {
+        events.addListener(AsyncPlayerConfigurationEvent.class, event -> {
             Player player = event.getPlayer();
             player.setAutoViewable(false);
             player.setRespawnPoint(spawnPos);
@@ -121,7 +121,7 @@ public class OverflowLimbo {
         });
         if (!config.isTablistEnabled()) {
             events.addListener(PlayerPacketOutEvent.class, event -> {
-                if (event.getPacket() instanceof PlayerInfoPacket) event.setCancelled(true);
+                if (event.getPacket() instanceof PlayerInfoUpdatePacket) event.setCancelled(true);
             });
         }
         events.addListener(PlayerMoveEvent.class, event -> event.setCancelled(true));

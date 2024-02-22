@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "dev.codeerror"
-version = "1.2.1"
+version = "1.3"
 
 apply(plugin = "com.github.johnrengelman.shadow")
 
@@ -16,8 +16,9 @@ repositories {
 }
 
 dependencies {
-    implementation("com.github.Minestom:Minestom:aebf72de90")
-    implementation("net.kyori:adventure-text-minimessage:4.12.0")
+    implementation("net.minestom:minestom-snapshots:7320437640")
+    implementation("net.kyori:adventure-text-minimessage:4.16.0")
+    implementation("org.slf4j:slf4j-simple:2.0.12")
 }
 
 tasks.withType<ShadowJar> {
