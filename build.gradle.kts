@@ -2,13 +2,11 @@ import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
 plugins {
     id("java")
-    id("com.github.johnrengelman.shadow") version "7.1.2" apply false
+    id("com.github.johnrengelman.shadow") version "8.1.1"
 }
 
 group = "dev.codeerror"
 version = "1.3"
-
-apply(plugin = "com.github.johnrengelman.shadow")
 
 repositories {
     mavenCentral()
