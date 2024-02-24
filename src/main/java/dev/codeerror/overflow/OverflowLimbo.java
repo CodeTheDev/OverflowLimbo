@@ -136,7 +136,10 @@ public class OverflowLimbo {
         switch (proxyType) {
             case "velocity" -> {
                 String velocitySecret = config.getVelocitySecret();
-                if (velocitySecret.isBlank()) break;
+                if (velocitySecret.isBlank()) {
+                    MojangAuth.init();
+                    break;
+                }
                 VelocityProxy.enable(velocitySecret);
                 logger.info("Velocity modern forwarding support enabled.");
             }
