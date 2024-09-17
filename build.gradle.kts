@@ -6,17 +6,16 @@ plugins {
 }
 
 group = "dev.codeerror"
-version = "1.3"
+version = "1.4"
 
 repositories {
     mavenCentral()
-    maven(url = "https://jitpack.io")
 }
 
 dependencies {
-    implementation("net.minestom:minestom-snapshots:7320437640")
-    implementation("net.kyori:adventure-text-minimessage:4.16.0")
-    implementation("org.slf4j:slf4j-simple:2.0.12")
+    implementation("net.minestom:minestom-snapshots:9fbff439e7")
+    implementation("net.kyori:adventure-text-minimessage:4.17.0")
+    implementation("org.slf4j:slf4j-simple:2.0.16")
 }
 
 tasks.withType<ShadowJar> {
